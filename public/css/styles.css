@@ -1,0 +1,17 @@
+.header {
+  min-height: 50px;
+  background-color: #00424a;
+  text-align: center;
+  color: white;
+}
+.brand {
+  padding: 1rem;
+}
+.camera {
+  display: flex;
+  flex-wrap: wrap;
+}
+.video {
+  border: 2px solid black;
+  margin: 0 auto;
+}
