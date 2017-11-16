@@ -1,10 +1,24 @@
 <div class="container barcode-page">
-    <div class="camera">
+    {{!-- <div class="camera">
         <video id="video" width="320" height="auto" autoplay></video>
-        <button id="snap">Snap Photo</button>
+        <button id="snap" class='button'>Snap Photo</button> --}}
         {{!--
         <canvas id="canvas" width="320"></canvas> --}}
-    </div>
+    {{!-- </div> --}}
+
+    <!-- Div to show the scanner -->
+    <div id="scanner-container"></div>
+    <input type="button" id="btn" value="Start/Stop the scanner" />
+    <button id="startScan" class='button'>Start the Scanner</button>
+
+    <fieldset class="input-group">
+        <input type="file" accept="image/*;capture=camera">
+        <button>Rerun</button>
+    </fieldset>
+
+        <div id="interactive" class="viewport"></div>
+        <div id="debug" class="detection"></div>
+
     <div class="product-info">
         <div>Product:</div>
         <div>Price</div>

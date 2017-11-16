@@ -11,7 +11,26 @@
   display: flex;
   flex-wrap: wrap;
 }
-.video {
+.video#video {
   border: 2px solid black;
   margin: 0 auto;
+}
+.button {
+  background-color: red;
+  color: white;
+  widows: 20px;
+  cursor: pointer;
+  margin: 1rem auto;
+  padding: 1rem;
+}
+/* In order to place the tracking correctly */
+
+canvas.drawing,
+canvas.drawingBuffer {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+div#scanner-container {
+  border: 2px solid black;
 }

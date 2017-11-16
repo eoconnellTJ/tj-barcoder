@@ -10,7 +10,8 @@ var expressValidator = require('express-validator');
 var dotenv = require('dotenv');
 var exphbs = require('express-handlebars');
 var mongoose = require('mongoose');
-var Quagga = require("quagga");
+const Quagga = require("quagga").default;
+console.log("quaqqa init==", Quagga);
 
 // Load environment variables from .env file
 dotenv.load();
