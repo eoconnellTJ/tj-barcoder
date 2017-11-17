@@ -28,12 +28,11 @@ if (
           type: "LiveStream",
           target: document.querySelector("#scanner-container"),
           constraints: {
-            width: 480,
+            width: 640,
             height: 320,
             facingMode: "environment"
           }
         },
-        frequency: 2,
         decoder: {
           readers: [
             "code_128_reader",
@@ -81,8 +80,6 @@ if (
         drawingCanvas = Quagga.canvas.dom.overlay;
 
       if (result) {
-        console.log("processed==", result);
-        console.log("processed result.boxes==", result.boxes);
         
         if (result.boxes) {
           
@@ -120,14 +117,19 @@ if (
           );
         }
       }
+          Quagga.onDetected(function(result) {
+            console.log("AND THE CODE IS=====", result.codeResult.code);
+            console.log("Barcode detected and processed : [" + result.codeResult.code + "]", result);
+            Quagga.stop();
+          });
     });
 
-    Quagga.onDetected(function(result) {
-      console.log(
-        "Barcode detected and processed : [" + result.codeResult.code + "]",
-        result
-      );
-    });
+    // Quagga.onDetected(function(result) {
+    //   console.log(
+    //     "Barcode detected and processed : [" + result.codeResult.code + "]",
+    //     result
+    //   );
+    // });
 
     var resultCollector = Quagga.ResultCollector.create({
       capture: true, // keep track of the image producing this result
