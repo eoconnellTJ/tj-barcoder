@@ -18,18 +18,19 @@
 .button {
   background-color: red;
   color: white;
-  widows: 20px;
   cursor: pointer;
   margin: 1rem auto;
   padding: 1rem;
 }
 /* In order to place the tracking correctly */
-
+.barcode-page {
+  padding: 0 1rem;
+}
 canvas.drawing,
 canvas.drawingBuffer {
-  position: absolute;
+  position: relative;
   left: 0;
-  top: 0;
+  top: -320px;
 }
 div#scanner-container {
   border: 2px solid black;

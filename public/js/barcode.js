@@ -11,34 +11,35 @@ console.log("connected barcoder");
 //     console.log(err);
 //   }
 // );
+document.querySelector("#qr-submit-form").addEventListener("submit", e => {
+  e.preventDefault();
+  var qrcode = document.querySelector("#input-qr-code").value;
+  console.log("submitted", qrcode, e);
+});
+
 if (
   navigator.mediaDevices &&
   typeof navigator.mediaDevices.getUserMedia === "function"
 ) {
-  
   var _scannerIsRunning = false;
 
   function startScanner() {
-    const workers = navigator.hardwareConcurrency;
-    console.log('how many workers==', workers)
+    var foundCode = { found: false, code: "" };
     Quagga.init(
-      { numOfWorkers: 0,
+      {
+        numOfWorkers: navigator.hardwareConcurrency,
         inputStream: {
           name: "Live",
           type: "LiveStream",
           target: document.querySelector("#scanner-container"),
           constraints: {
-            width: 640,
+            width: 343,
             height: 320,
             facingMode: "environment"
           }
         },
         decoder: {
-          readers: [
-            "code_128_reader",
-            "upc_reader",
-            "upc_e_reader"
-          ],
+          readers: ["code_128_reader", "upc_reader", "upc_e_reader"],
           debug: {
             showCanvas: true,
             showPatches: true,
@@ -57,10 +58,11 @@ if (
               showBB: true
             }
           },
+          patchSize: "medium",
           multiple: false
         }
       },
-      function(err) {
+      err => {
         if (err) {
           console.log(err);
           return;
@@ -74,15 +76,11 @@ if (
       }
     );
 
-    Quagga.onProcessed(function(result) {
-      
+    Quagga.onProcessed(result => {
       var drawingCtx = Quagga.canvas.ctx.overlay,
         drawingCanvas = Quagga.canvas.dom.overlay;
-
       if (result) {
-        
         if (result.boxes) {
-          
           drawingCtx.clearRect(
             0,
             0,
@@ -90,10 +88,10 @@ if (
             parseInt(drawingCanvas.getAttribute("height"))
           );
           result.boxes
-            .filter(function(box) {
+            .filter(box => {
               return box !== result.box;
             })
-            .forEach(function(box) {
+            .forEach(box => {
               Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, {
                 color: "green",
                 lineWidth: 2
@@ -109,6 +107,8 @@ if (
         }
 
         if (result.codeResult && result.codeResult.code) {
+          foundCode.found = true;
+          foundCode.code = result.codeResult.code;
           Quagga.ImageDebug.drawPath(
             result.line,
             { x: "x", y: "y" },
@@ -117,49 +117,33 @@ if (
           );
         }
       }
-          Quagga.onDetected(function(result) {
-            console.log("AND THE CODE IS=====", result.codeResult.code);
-            console.log("Barcode detected and processed : [" + result.codeResult.code + "]", result);
-            Quagga.stop();
-          });
+      Quagga.onDetected(result => {
+        // console.log(
+        //   "Barcode detected and processed : [" + result.codeResult.code + "]",
+        //   result
+        // );
+        barcode(result.codeResult.code);
+      });
     });
-
-    // Quagga.onDetected(function(result) {
-    //   console.log(
-    //     "Barcode detected and processed : [" + result.codeResult.code + "]",
-    //     result
-    //   );
-    // });
-
-    var resultCollector = Quagga.ResultCollector.create({
-      capture: true, // keep track of the image producing this result
-      capacity: 20, // maximum number of results to store
-      blacklist: [
-        // list containing codes which should not be recorded
-        { code: "3574660239843", format: "ean_13" }
-      ],
-      filter: function(codeResult) {
-        // only store results which match this constraint
-        // returns true/false
-        // e.g.: return codeResult.format === "ean_13";
-        return true;
-      }
-    });
-    console.log("res collector", resultCollector);
-    Quagga.registerResultCollector(resultCollector);
   }
+  var barcode = detectedCode => {
+    console.log("within barcode", detectedCode);
+    return detectedCode;
+  };
 
-  // Start/stop scanner
-  document.getElementById("btn").addEventListener(
-    "click",
-    function() {
-      if (_scannerIsRunning) {
-        Quagga.stop();
-      } else {
-        startScanner();
-      }
-    },
-    false
-  );
+  if (document.querySelector(".barcode-page")) {
+    document.getElementById("btn").addEventListener(
+      "click",
+      () => {
+        if (_scannerIsRunning) {
+          Quagga.stop();
+        } else {
+          startScanner();
+        }
+      },
+      false
+    );
+  }
 }
+
 document.querySelector("#startScan").addEventListener("click", startScanner);
