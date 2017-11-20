@@ -11,8 +11,8 @@
     <input class='button' type="button" id="btn" value="Start/Stop the scanner" />
 
     <button id="startScan" class='button'>Start the Scanner</button>
-    <form class='input' id='qr-submit-form'>
-        <input type="text" id='input-qr-code' placeholder='Enter QR Code Here'> {{!--
+    <form action='barcode/post' method="POST" class='input' id='qr-submit-form'>
+        <input type="text" id='input-qr-code' name='barcode' placeholder='Enter QR Code Here'> {{!--
         <input type="submit" value="Submit"> --}}
     </form>
     <div id="interactive" class="viewport"></div>
@@ -24,7 +24,6 @@
         <div>Category</div>
         <div>Description</div>
     </div>
-    {{log data}}
     {{#if data}}
         yes data
     {{/if}}

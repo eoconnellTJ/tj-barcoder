@@ -1,14 +1,17 @@
 var invListings = require("../inv-listings.json");
 var Quagga = require("quagga").default;
-console.log("quaqqa init on barcode js==", Quagga);
 /**
  * GET /contact
  */
 exports.barcodeGet = function(req, res) {
-  console.log("running barcode", invListings);
   res.render("barcode", {data: invListings,
     title: "Barcode", 
   });
+};
+
+exports.barcodePost = function(req, res) {
+  console.log('whats the id==?', req.body.barcode)
+  return res.redirect("/barode/1");
 };
 
 

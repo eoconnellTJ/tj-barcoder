@@ -11,7 +11,6 @@ var dotenv = require('dotenv');
 var exphbs = require('express-handlebars');
 var mongoose = require('mongoose');
 const Quagga = require("quagga").default;
-console.log("quaqqa init==", Quagga);
 
 // Load environment variables from .env file
 dotenv.load();
@@ -64,6 +63,10 @@ app.get('/contact', contactController.contactGet);
 app.post('/contact', contactController.contactPost);
 
 app.get('/barcode', barcodeController.barcodeGet);
+app.post('/barcode', function(req,res) {
+  console.log('req body===', req.body)
+});
+//app.post("/barcode", barcodeController.barcodePost);
 app.get("/user", userController.getUser);
 
 // Production error handler

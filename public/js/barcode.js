@@ -119,11 +119,11 @@ if (window.location.pathname === "/barcode") {
           }
         }
         Quagga.onDetected(result => {
-          // console.log(
-          //   "Barcode detected and processed : [" + result.codeResult.code + "]",
-          //   result
-          // );
-          barcode(result.codeResult.code);
+          console.log(
+            "Barcode detected and processed : [" + result.codeResult.code + "]",
+            result
+          );
+          //barcode(result.codeResult.code);
         });
       });
     }
