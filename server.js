@@ -20,6 +20,7 @@ dotenv.load();
 var HomeController = require('./controllers/home');
 var contactController = require('./controllers/contact');
 var barcodeController = require('./controllers/barcode');
+var userController = require('./controllers/users');
 
 var app = express();
 
@@ -63,6 +64,7 @@ app.get('/contact', contactController.contactGet);
 app.post('/contact', contactController.contactPost);
 
 app.get('/barcode', barcodeController.barcodeGet);
+app.get("/user", userController.getUser);
 
 // Production error handler
 if (app.get('env') === 'production') {

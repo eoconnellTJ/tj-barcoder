@@ -1,29 +1,22 @@
 <div class="container barcode-page">
-    {{!-- <div class="camera">
+    <h1>{{title}}</h1>
+    {{!--
+    <div class="camera">
         <video id="video" width="320" height="auto" autoplay></video>
-        <button id="snap" class='button'>Snap Photo</button> --}}
-        {{!--
-        <canvas id="canvas" width="320"></canvas> --}}
-    {{!-- </div> --}}
+        <button id="snap" class='button'>Snap Photo</button> --}} {{!--
+        <canvas id="canvas" width="320"></canvas> --}} {{!-- </div> --}}
 
     <!-- Div to show the scanner -->
     <div id="scanner-container"></div>
-    <input type="button" id="btn" value="Start/Stop the scanner" />
-    
+    <input class='button' type="button" id="btn" value="Start/Stop the scanner" />
+
     <button id="startScan" class='button'>Start the Scanner</button>
-    <form id='qr-submit-form'>
-<input type="text" id='input-qr-code' placeholder='Enter QR Code Here'>
-{{!-- <input type="submit" value="Submit"> --}}
+    <form class='input' id='qr-submit-form'>
+        <input type="text" id='input-qr-code' placeholder='Enter QR Code Here'> {{!--
+        <input type="submit" value="Submit"> --}}
     </form>
-    
-
-    {{!-- <fieldset class="input-group">
-        <input type="file" accept="image/*;capture=camera">
-        <button>Rerun</button>
-    </fieldset> --}}
-
-        <div id="interactive" class="viewport"></div>
-        <div id="debug" class="detection"></div>
+    <div id="interactive" class="viewport"></div>
+    <div id="debug" class="detection"></div>
 
     <div class="product-info">
         <div>Product:</div>
@@ -31,4 +24,8 @@
         <div>Category</div>
         <div>Description</div>
     </div>
+    {{log data}}
+    {{#if data}}
+        yes data
+    {{/if}}
 </div>

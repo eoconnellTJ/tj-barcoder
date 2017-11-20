@@ -1,0 +1,22 @@
+<h1>Get User Info from {{title}}</h1>
+<form class='get-user-info'>
+    <label for="name">First Name</label>
+    <input id='firstname' class='input' type="text" name="first-name" autofocus>
+    <label for="name">Last Name</label>
+    <input id='lastname' class='input' type="text" name="last-name" autofocus>
+    <label for="email">Email</label>
+    <input class='input' type="email" name="email" id="email">
+    <label for="product">Product</label>
+    <input class='input' type="product" name="product" id="product">
+    <br>
+    <input class='button submit' type="submit" value="Submit">
+</form>
+
+{{#if data}}
+<div>YES DATA</div>
+<ol>
+    {{#each data}}
+    <li>{{product}}, {{letter}} {{number}} </li>
+    <br> {{/each}}
+</ol>
+{{/if}}
